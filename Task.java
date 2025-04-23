@@ -5,11 +5,31 @@ public class Task {
     private int id;
     private String description;
     private boolean completed;
+    private String category;
+    private int priorityLevel;
 
-    public Task(int id, String description){
+    public Task(int id, String description, String category, int priority){
         this.id = id;
         this.description = description;
         this.completed = false;
+        this.category = category;
+        this.priorityLevel = priority;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public int getPriorityLevel() {
+        return priorityLevel;
+    }
+
+    public void setPriorityLevel(int priorityLevel) {
+        this.priorityLevel = priorityLevel;
     }
 
     public int getId() {

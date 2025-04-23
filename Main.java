@@ -1,12 +1,14 @@
 package Projetos;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
         Scanner input = new Scanner(System.in);
         TaskManager manager = new TaskManager();
-        int nextId = 1;
+        String csvPath = "data/tasks.csv";
 
         while(true){
             System.out.println("\n--- MENU ---");
@@ -14,6 +16,8 @@ public class Main {
             System.out.println("2. Listar tarefas");
             System.out.println("3. Marcar como concluída");
             System.out.println("4. Remover tarefa");
+            System.out.println("5. Salvar tarefas em CSV");
+            System.out.println("6. Carregar tarefas do Csv");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
 
@@ -22,10 +26,11 @@ public class Main {
 
             switch(option){
                 case 1:
-                    System.out.println("Descrição da tarefa: ");
+                    System.out.println("Descrição da tarefa(categoria e nivel de prioridade:");
                     String desc = input.nextLine();
-                    Task task = new Task(nextId++, desc);
-                    manager.addTask(task);
+                    String ctg = input.nextLine();
+                    int lvl = input.nextInt();
+                    manager.addTask(desc, ctg, lvl);
                     break;
 
                 case 2:
@@ -53,6 +58,19 @@ public class Main {
                         System.out.println("Tarefa não encontrada");
                     }
                     break;
+
+                case 5:
+                    File pasta = new File("data");
+                    if(!pasta.exists()){
+                        pasta.mkdir();
+                    }
+                    manager.saveTasksToCsv(csvPath);
+                    break;
+
+                case 6:
+                    manager.loadTaskToCsv(csvPath);
+                    break;
+
 
                 case 0:
                     System.out.println("Saindo...Até já já!");
